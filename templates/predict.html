@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Loan Eligibility Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2em;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 5px;
+            padding: 2em;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        h1, p {
+            text-align: center;
+        }
+        .form-row {
+            margin-bottom: 1em;
+        }
+        .form-row label {
+            display: block;
+            margin-bottom: .5em;
+        }
+        .form-row select, .form-row input {
+            width: 100%;
+            padding: .5em;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .radio-control {
+            margin-bottom: 1em;
+        }
+        .radio-control label{
+            display: inline;
+            margin-bottom: .5em;
+        }
+        .radio-control input[type=radio] {
+            display: inline;
+            width:5%;
+            padding: .5em;
+        }
+
+        .button {
+            background-color: red;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .prediction-result {
+            font-size: 24px;
+            margin-top: 20px;
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>House Loan Eligibility Prediction</h1>
+        <p>Please enter the details to check your house loan eligibility:</p>
+        <form action="/predict" method="post">
+            <div class="form-row">
+                <label for="applicant_income">Applicant Income ($):</label>
+                <input type="number" id="applicant_income" name="applicant_income" value = "0" min = "0" >
+            </div>
+            <div class="form-row">
+                <label for="coapplicant_income">Coapplicant Income ($):</label>
+                <input type="number" id="coapplicant_income" name="coapplicant_income" value = "0" min = "0">
+            </div>
+            <div class="form-row">
+                <label for="loan_amount">Loan Amount (in thousand $):</label>
+                <input type="number" id="loan_amount" name="loan_amount" value = "0" min = "0">
+            </div>
+            <div class="form-row">
+                <label for="loan_amount_term">Loan Amount Term (in months):</label>
+                <input type="number" id="loan_amount_term" name="loan_amount_term" value = "0" min = "0">
+            </div>
+            <div class="radio-control">
+                <label>Credit History:</label>
+                <input type="radio" id ="credit_history"  name ="credit_history" value="yes" checked="checked" >Yes</input>
+                <input type="radio" id ="credit_history"  name ="credit_history" value="no" >No</input>
+            </div>
+            <div class="radio-control">
+                <label >Gender:</label>
+                <input type="radio" id ="gender" name ="gender"  value="male" checked="checked" >Male</input>
+                <input type="radio" id ="gender" name ="gender" value="female" >Female</input>
+            </div>
+            <div class="radio-control">
+                <label>Education:</label>
+                <input type="radio" id ="education"  name ="education" value="graduate" checked="checked" >Graduate</input>
+                <input type="radio" id ="education"  name ="education" value="not_graduate" >Not a Graduate</input>
+            </div>
+            <div class="radio-control">
+                <label>Self Employed:</label>
+                <input type="radio" id ="self_employed" name ="self_employed" value="yes" checked="checked" >Yes</input>
+                <input type="radio" id ="self_employed" name ="self_employed" value="no" >No</input>
+            </div>
+            <div class="radio-control">
+                <label>Property Location:</label>
+                <input type="radio" id ="property_area" name ="property_area" value="urban" checked="checked" >Urban</input>
+                <input type="radio" id ="property_area" name ="property_area" value="semiurban" >Semiurban</input>
+                <input type="radio" id ="property_area" name ="property_area" value="rural" >Rural</input>
+            </div>
+            <div class="radio-control">
+                <label>Married:</label>
+                <input type="radio" id ="married" name ="married" value="yes" checked="checked" >Yes</input>
+                <input type="radio" id ="married" name ="married" value="no" >No</input>
+            </div>
+            <div class="form-row">
+                <label for="dependents">Dependents:</label>
+                <input type="number" id="dependents" name="dependents" value = "0" min = "0" max = "3">
+            </div>
+            <div class="form-row">
+                <label></label>
+                <input type="submit" value="Predict" class="button" >
+            </div>
+        </form>
+        <div id="prediction-result" class="prediction-result">
+            <br><h3>{{ prediction_text }}</h3>
+        </div>
+        <p style="text-align: center;"><a href="/logout">Press here to Logout</a></p>
+    </div>
+</body>
+</html>
